@@ -15,7 +15,6 @@ jobs:
           sparse-checkout: |
             hf_space
             policy_rag
-          sparse-checkout-cone-mode: false
           lfs: true
       - name: Push to hub
         env:
