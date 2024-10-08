@@ -1,0 +1,32 @@
+name: policy-rag
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.11
+  - pip
+  - pip:
+    - pydantic
+    - pandas
+    - numpy
+    - openai
+    - asyncio
+    - python-dotenv
+    - langchain_openai
+    - langchain_huggingface
+    - langchain_core==0.2.38
+    - langchain
+    - langchain_community
+    - langchain-text-splitters
+    - langchain_experimental
+    - pymupdf
+    - tiktoken
+    - sentence_transformers
+    - datasets
+    - pyarrow
+    - ragas
+    - qdrant-client
+    - langchain-qdrant
+    - langsmith
+    - langgraph
+    - chainlit

@@ -1,0 +1,22 @@
+data_dir: 'data'
+chunk_method: {
+    'method': 'token-overlap',
+    'args': {
+        'chunk_size': 1000,
+        'chunk_overlap': 100
+    }
+}
+
+#chunk_method: {
+#    'method': 'semantic',
+#    'args': {
+#        'model_source': 'openai',
+#        'model_name': 'text-embedding-3-large',
+#        'breakpoint_type': 'gradient'
+#    }
+#}
+
+n_qa_pairs: 20
+ls_project: 'policy-rag'
+ls_dataset_name: "policy-golden-1000-over-100"
+ls_dataset_description: 'Policy RAG - RAGAS evaluation dataset using 1000 token segments with 100 token overlap.'

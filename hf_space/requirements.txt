@@ -1,0 +1,16 @@
+numpy
+chainlit==0.7.700
+openai
+langchain_openai
+langchain_huggingface
+langchain_core==0.2.38
+langchain
+langchain_community
+langchain-text-splitters
+langchain_experimental
+pymupdf
+tiktoken
+qdrant-client
+langchain-qdrant
+langsmith
+langgraph
