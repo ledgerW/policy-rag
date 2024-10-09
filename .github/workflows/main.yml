@@ -1,21 +1,37 @@
-name: Deploy to HF Space
+name: Deploy to Huggingface Spaces
 on:
   push:
     branches: [main]
 
-  # to run this workflow manually from the Actions tab
+  # To run this workflow manually from the Actions tab
   workflow_dispatch:
 
 jobs:
   sync-to-space:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v3
         with:
-          sparse-checkout: |
-            hf_space
-            policy_rag
-      - name: Push to hub
+          fetch-depth: 0
+          lfs: true
+      
+      # Step to configure sparse-checkout to include only hf_space/ and policy_rag/
+      - name: Setup sparse checkout
+        run: |
+          git sparse-checkout init --cone
+          git sparse-checkout set hf_space/ policy_rag/
+
+      # Step to move the contents of hf_space/ to the root
+      - name: Move hf_space contents to root level
+        run: |
+          mv hf_space/* .
+          rm -rf hf_space
+
+      # Step to push the selected directories to Hugging Face Spaces
+      - name: Push to Hugging Face Spaces
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
-        run: git push https://lw2134:$HF_TOKEN@huggingface.co/spaces/lw2134/policy_rag main
+        run: |
+          git add .
+          git commit -m "Sync hf_space contents to root and push policy_rag"
+          git push https://lw2134:$HF_TOKEN@huggingface.co/spaces/lw2134/policy_rag main

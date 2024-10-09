@@ -1,10 +1,10 @@
 ---
-title: {{title}}
-emoji: {{emoji}}
-colorFrom: {{colorFrom}}
-colorTo: {{colorTo}}
-sdk: {{sdk}}
-sdk_version: "{{sdkVersion}}"
-app_file: app.py
-pinned: true
+title: Policy Rag
+emoji: 🦀
+colorFrom: purple
+colorTo: blue
+sdk: docker
+pinned: false
+license: apache-2.0
+short_description: An AI Policy RAG App
 ---
