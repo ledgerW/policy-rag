@@ -1,4 +1,6 @@
 import os
+from dotenv import load_dotenv
+load_dotenv()
 
 from langchain_core.documents.base import Document
 from langchain_qdrant import QdrantVectorStore

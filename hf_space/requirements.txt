@@ -1,5 +1,5 @@
 numpy
-chainlit==1.2.0
+chainlit==1.0.0
 openai
 langchain_openai
 langchain_huggingface
