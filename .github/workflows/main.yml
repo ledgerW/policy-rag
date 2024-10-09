@@ -32,6 +32,8 @@ jobs:
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
+          git config user.email "ledger.west@gmail.com"
+          git config user.name "Ledger"
           git add .
           git commit -m "Sync hf_space contents to root and push policy_rag"
           git push https://lw2134:$HF_TOKEN@huggingface.co/spaces/lw2134/policy_rag main
