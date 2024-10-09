@@ -27,6 +27,13 @@ jobs:
           mv hf_space/* .
           rm -rf hf_space
 
+      # Step to pull the latest changes from Hugging Face repo
+      - name: Pull latest changes from Hugging Face
+        env:
+          HF_TOKEN: ${{ secrets.HF_TOKEN }}
+        run: git pull https://lw2134:$HF_TOKEN@huggingface.co/spaces/lw2134/policy_rag main --rebase
+
+
       # Step to push the selected directories to Hugging Face Spaces
       - name: Push to Hugging Face Spaces
         env:
