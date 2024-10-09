@@ -25,7 +25,7 @@ jobs:
         run: |
           echo "hf_space/*" >> .git/info/sparse-checkout
           echo "policy_rag/*" >> .git/info/sparse-checkout
-          git pull --depth 1 origin main
+          git pull origin main
 
       # Step to remove everything except the required directories and the .git folder
       - name: Clean up repo to keep only necessary files
