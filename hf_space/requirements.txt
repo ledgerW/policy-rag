@@ -1,5 +1,5 @@
 numpy
-chainlit==0.7.700
+chainlit
 openai
 langchain_openai
 langchain_huggingface

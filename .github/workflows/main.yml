@@ -10,16 +10,21 @@ jobs:
   sync-to-space:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
-          lfs: true
-      
-      # Step to configure sparse-checkout to include only hf_space/ and policy_rag/
+      # Initialize a bare repository to configure sparse-checkout before fetching any files
+      - name: Initialize Git repository
+        run: |
+          git init
+          git config user.email "ledger.west@gmail.com"
+          git config user.name "Ledger"
+          git remote add origin https://github.com/${{ github.repository }}
+          git config core.sparseCheckout true
+
+      # Configure sparse checkout to include only the desired directories
       - name: Setup sparse checkout
         run: |
-          git sparse-checkout init --cone
-          git sparse-checkout set hf_space/ policy_rag/
+          echo "hf_space/*" >> .git/info/sparse-checkout
+          echo "policy_rag/*" >> .git/info/sparse-checkout
+          git pull origin main
 
       # Step to move the contents of hf_space/ to the root
       - name: Move hf_space contents to root level
@@ -27,13 +32,11 @@ jobs:
           mv hf_space/* .
           rm -rf hf_space
 
-      # Step to push the selected directories to Hugging Face Spaces
-      - name: Push to Hugging Face Spaces
+      # Step to force push the selected directories to Hugging Face Spaces
+      - name: Force push to Hugging Face Spaces
         env:
           HF_TOKEN: ${{ secrets.HF_TOKEN }}
         run: |
-          git config user.email "ledger.west@gmail.com"
-          git config user.name "Ledger"
           git add .
           git commit -m "Sync hf_space contents to root and push policy_rag"
-          git push https://lw2134:$HF_TOKEN@huggingface.co/spaces/lw2134/policy_rag main --force
+          git push https://lw2134:$HF_TOKEN@huggingface.co/spaces/lw2134/policy-rag main --force
