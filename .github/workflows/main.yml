@@ -14,6 +14,7 @@ jobs:
       - name: Initialize Git repository
         run: |
           git init
+          git config init.defaultBranch main
           git config user.email "ledger.west@gmail.com"
           git config user.name "Ledger"
           git remote add origin https://github.com/${{ github.repository }}
