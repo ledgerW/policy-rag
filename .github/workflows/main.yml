@@ -27,10 +27,10 @@ jobs:
           echo "policy_rag/*" >> .git/info/sparse-checkout
           git pull --depth 1 origin main
 
-      # Step to remove everything except the required directories
+      # Step to remove everything except the required directories and the .git folder
       - name: Clean up repo to keep only necessary files
         run: |
-          find . -mindepth 1 ! -regex '^./hf_space\(/.*\)?' ! -regex '^./policy_rag\(/.*\)?' -delete
+          find . -mindepth 1 ! -regex '^./hf_space\(/.*\)?' ! -regex '^./policy_rag\(/.*\)?' ! -regex '^./\.git\(/.*\)?' -delete
 
       # Step to move the contents of hf_space/ to the root
       - name: Move hf_space contents to root level
