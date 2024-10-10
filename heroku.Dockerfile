@@ -1,23 +1,23 @@
-# Use an appropriate base image, e.g., python:3.10-slim
 FROM --platform=linux/amd64 python:3.11-slim
 
-# Set environment variables (e.g., set Python to run in unbuffered mode)
-ENV PYTHONUNBUFFERED 1
-
-# Set the working directory
 WORKDIR /app
 
-# Copy your application's requirements and install them
-COPY ./chainlit /app/
+COPY chainlit /app
+COPY policy_rag /app/policy_rag
 
-RUN mkdir /app/policy_rag
-COPY ./policy_rag /app/policy_rag
+RUN pip install -r /app/requirements.txt		
 
-RUN pip install -r /app/requirements.txt
+# Create a non-root user
+RUN useradd -m myuser
 
-# Copy your application code into the container
-#COPY . /app/
+# Change ownership of the /app directory to the non-root user
+RUN chown -R myuser:myuser /app
 
-EXPOSE 8080
+# For local testing only. Not recognized in Heroku environment
+EXPOSE 8000
 
-CMD ["python", "-m", "chainlit", "run", "app.py", "-h", "--port", "8080"]
+# Switch to the non-root user
+USER myuser
+
+# Run the app. $PORT is set by Heroku
+CMD python -m chainlit run app.py -h --host 0.0.0.0 --port $PORT
