@@ -1,3 +1,3 @@
 build:
   docker:
-    web: chainlit/heroku.Dockerfile
+    web: heroku.Dockerfile

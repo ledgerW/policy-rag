@@ -15,6 +15,5 @@ jobs:
           heroku_api_key: ${{secrets.HEROKU_API_KEY}}
           heroku_app_name: "policy-rag"
           heroku_email: "ledger.west@gmail.com"
-          appdir: "chainlit"
           usedocker: true
           stack: "container"
