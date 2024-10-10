@@ -8,12 +8,15 @@ ENV PYTHONUNBUFFERED 1
 WORKDIR /app
 
 # Copy your application's requirements and install them
-COPY requirements.txt /app/
+COPY ./chainlit /app/
+
+RUN mkdir /app/policy_rag
+COPY ./policy_rag /app/policy_rag
 
 RUN pip install -r /app/requirements.txt
 
 # Copy your application code into the container
-COPY . /app/
+#COPY . /app/
 
 EXPOSE 8080
 
