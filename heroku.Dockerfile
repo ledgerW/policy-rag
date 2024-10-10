@@ -2,6 +2,7 @@ FROM --platform=linux/amd64 python:3.11-slim
 
 WORKDIR /app
 
+# Copy Chainlit app files into app/
 COPY chainlit /app
 COPY policy_rag /app/policy_rag
 
