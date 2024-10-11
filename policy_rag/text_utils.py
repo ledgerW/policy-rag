@@ -8,6 +8,8 @@ from langchain_text_splitters import RecursiveCharacterTextSplitter
 from langchain_experimental.text_splitter import SemanticChunker
 from langchain_openai.embeddings import OpenAIEmbeddings
 
+from replit.object_storage import Client
+
 
 # Text Loading
 class DocLoader:
@@ -29,6 +31,19 @@ class DocLoader:
             self.load(doc_path)
 
         return self.docs
+
+    
+    def upload_to_storage(self, file_path: str, file_name: str):
+        client = Client()
+        with open(file_path, 'rb') as file:
+            client.upload_from_file(file_name, file)
+    
+    
+    def download_from_storage(self, file_name: str, dest_path: str):
+        client = Client()
+        obj = client.download(file_name)
+        with open(dest_path, 'wb') as file:
+            file.write(obj)
     
 
 # Text Splitting

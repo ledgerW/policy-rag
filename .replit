@@ -1,0 +1,17 @@
+modules = ["python-3.11"]
+run = "cd chainlit && chainlit run app.py -h --host 0.0.0.0 --port 80"
+
+[nix]
+channel = "stable-24_05"
+
+[deployment]
+run = ["sh", "-c", "cd chainlit && chainlit run app.py -h --host 0.0.0.0 --port 80"]
+deploymentTarget = "cloudrun"
+build = ["sh", "-c", "echo \"No build step necessary\""]
+
+[[ports]]
+localPort = 80
+externalPort = 80
+
+[objectStorage]
+defaultBucketID = "replit-objstore-a06deae8-8929-4909-be59-ceeb83728fa4"
